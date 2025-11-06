@@ -1,14 +1,13 @@
 # NavaLoka: Platform AI & Blockchain untuk Pelestarian dan Ekonomi Kreatif Budaya Indonesia
 
 ![NavaLoka Landing Page](./public/landing-hero.png)
-*Gambar: Tampilan halaman beranda NavaLoka yang menampilkan slogan "Budaya. Kreativitas. Teknologi." dan tombol aksi utama dengan desain modern berwarna gelap dan pola kisi-kisi di latar belakang.*
+_Gambar: Tampilan halaman beranda NavaLoka yang menampilkan slogan "Budaya. Kreativitas. Teknologi." dan tombol aksi utama dengan desain modern berwarna gelap dan pola kisi-kisi di latar belakang._
 
 > **Catatan**: Simpan gambar landing page di folder `public/` dengan nama `landing-hero.png` (atau sesuaikan path di atas bila memakai nama lain/URL).
 
 ## 📋 Daftar Isi
 
 - [Tentang NavaLoka](#tentang-navaloka)
-- [Identitas Tim](#identitas-tim)
 - [Fitur Utama](#fitur-utama)
 - [Teknologi yang Digunakan](#teknologi-yang-digunakan)
 - [Flow Aplikasi](#flow-aplikasi)
@@ -42,48 +41,33 @@ NavaLoka menghadirkan solusi terpadu berupa **pasar budaya digital (Cultural Mar
 
 ---
 
-## 👥 Identitas Tim
-
-- **Nama Tim**: NavaLoka
-- **Kategori**: Profesional
-- **Kompetisi**: BUDAYA GO! 2025 - Kompetisi Inovasi Digital Budaya Indonesia
-- **Kategori Tema**: Promosi dan Kreasi Ekonomi Kebudayaan
-
-### Anggota Tim
-
-- **Ketua Tim**: Diwan Muhamad - [Teknologi]
-  - Email: diwanmuhamad37@gmail.com
-  - Kontak: 081246505738
-- **Anggota**:
-  1. Syarifiyana Mawaddah - [Budaya]
-  2. Ziyana Azzahratul Mubasysyarah - [Budaya]
-  3. Nengah Affan Riadi - [Teknologi]
-  4. Nabila Tiara Putri - [Teknologi]
-
----
-
 ## ✨ Fitur Utama
 
 ### 1. Digital Cultural Marketplace
+
 - Pelaku budaya dapat mengunggah karya digital turunan budaya (foto, musik, video, desain, dokumentasi, dll)
 - Pembelian dan transaksi menggunakan mata uang lokal (IDR) melalui integrasi Xendit
 - Setiap karya memiliki metadata budaya yang tersimpan di blockchain Solana, menjamin keaslian dan kepemilikan yang transparan
 
 ### 2. AI-Powered Cultural Narrator
+
 - AI secara otomatis menghasilkan narasi interaktif dan edukatif tentang karya yang diunggah
 - Menjelaskan asal-usul, filosofi, dan konteks budaya di balik setiap karya
 - Fitur chatbot interaktif yang dapat menjawab pertanyaan terkait platform, karya, dan budaya
 
 ### 3. Cultural Registry & Preservation System
+
 - Data budaya (metadata dan deskripsi naratif) disimpan dalam bentuk immutable record di blockchain
 - Sistem ini membantu pemerintah, akademisi, dan komunitas dalam mendokumentasikan kekayaan budaya dengan standar digital global
 
 ### 4. Creator Dashboard & Analytics
+
 - Panel kontrol bagi seniman dan komunitas untuk melihat statistik karya
 - Analisis performa penjualan dan sebaran audiens
 - Manajemen karya dan transaksi
 
 ### 5. Community Collaboration Hub
+
 - Ruang kolaboratif antar seniman, peneliti, dan lembaga kebudayaan
 - Berbagi karya, membuat proyek kolaboratif, dan membangun jejaring budaya digital Indonesia
 
@@ -92,6 +76,7 @@ NavaLoka menghadirkan solusi terpadu berupa **pasar budaya digital (Cultural Mar
 ## 🛠 Teknologi yang Digunakan
 
 ### Frontend
+
 - **Next.js 16** (React Framework) - Framework utama untuk pengembangan web
 - **Tailwind CSS** - Styling dan utility-first CSS framework
 - **TypeScript** - Type-safe JavaScript
@@ -99,19 +84,23 @@ NavaLoka menghadirkan solusi terpadu berupa **pasar budaya digital (Cultural Mar
 - **Zod** - Schema validation
 
 ### Backend & Database
+
 - **Supabase** - Backend as a Service (Auth, Database, Storage)
 - **PostgreSQL** - Database relasional (via Supabase)
 - **Node.js Serverless Functions** - API endpoints
 
 ### Blockchain & Storage
+
 - **Solana Devnet** - Blockchain untuk penyimpanan metadata budaya
 - **IPFS** - Decentralized file storage untuk karya digital
 
 ### AI & Integrations
+
 - **OpenAI API** - AI Storyteller & Chatbot untuk narasi budaya
 - **Xendit API** - Payment gateway untuk transaksi IDR
 
 ### Deployment
+
 - **Vercel** - Frontend deployment
 - **Supabase Cloud** - Backend deployment
 
@@ -238,6 +227,7 @@ Seniman]
 ### Prerequisites
 
 Pastikan Anda telah menginstall:
+
 - **Node.js** (versi 18 atau lebih baru)
 - **npm** atau **yarn** atau **pnpm**
 - **Git**
@@ -369,19 +359,23 @@ NavaLoka bertujuan untuk menciptakan ekosistem digital budaya yang inklusif, ber
 ### Manfaat Jangka Panjang
 
 #### Bagi Pelaku Budaya dan Seniman Lokal
+
 - Mendapatkan sarana pemasaran dan pendapatan langsung melalui marketplace budaya digital
 - Terlindungi dari plagiarisme dan klaim tidak sah melalui pencatatan metadata di blockchain
 - Meningkatkan visibilitas karya budaya ke audiens nasional maupun global
 
 #### Bagi Komunitas & Pemerintah
+
 - Menjadi arsip digital budaya nasional yang terdesentralisasi dan transparan
 - Mendukung program pelestarian budaya nasional dengan data yang tervalidasi dan terdokumentasi
 
 #### Bagi Masyarakat & Generasi Muda
+
 - Menjadi media pembelajaran budaya yang interaktif dan menarik berkat narasi AI
 - Mendorong tumbuhnya kesadaran dan kebanggaan terhadap budaya lokal di era digital
 
 #### Bagi Ekosistem Digital Indonesia
+
 - Mendorong integrasi antara AI, Web3, dan ekonomi kreatif
 - Memperkuat posisi Indonesia sebagai pelopor inovasi budaya digital di Asia Tenggara
 
@@ -392,12 +386,15 @@ NavaLoka bertujuan untuk menciptakan ekosistem digital budaya yang inklusif, ber
 ### Sumber Pendapatan
 
 1. **Platform Fee (5%)**
+
    - Potongan dari setiap transaksi penjualan karya budaya di marketplace
 
 2. **Program Sponsor dan Event Kolaboratif**
+
    - Kerja sama dengan lembaga, perusahaan, dan festival budaya untuk promosi dan monetisasi karya
 
 3. **API Access untuk Lembaga Pendidikan & Penelitian**
+
    - Membuka akses data budaya terkurasi dengan skema berlangganan (subscription) bagi universitas, museum, dan peneliti
 
 4. **Partnership Ekosistem Digital**
@@ -410,15 +407,19 @@ NavaLoka bertujuan untuk menciptakan ekosistem digital budaya yang inklusif, ber
 ### Tahap Lanjutan
 
 1. **Kolaborasi Strategis**
+
    - Kolaborasi dengan Kementerian Kebudayaan, komunitas adat, lembaga riset, dan seniman lokal untuk memperluas ekosistem konten budaya
 
 2. **Optimalisasi Mobile**
+
    - Optimalisasi versi mobile web (PWA – Progressive Web App) agar platform tetap ringan, cepat, dan dapat diakses dari berbagai perangkat
 
 3. **Cultural Data Map Indonesia**
+
    - Integrasi peta digital interaktif yang menampilkan persebaran budaya dan karya komunitas dari berbagai daerah
 
 4. **Fitur AI Lanjutan**
+
    - AI Plagiarism Detector untuk menjaga orisinalitas konten budaya digital
    - AI Visual Recognition (Cultural Image Classifier)
    - AI Audio Analyzer (untuk Musik Tradisional)
@@ -426,6 +427,7 @@ NavaLoka bertujuan untuk menciptakan ekosistem digital budaya yang inklusif, ber
    - AI Cultural Translator
 
 5. **Skalabilitas Blockchain**
+
    - Meningkatkan skalabilitas Integrasi Cultural Metadata Registry on Blockchain untuk memastikan pelacakan dan arsip digital budaya yang transparan dan permanen
 
 6. **API Public**
