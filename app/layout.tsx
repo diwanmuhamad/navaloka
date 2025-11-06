@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
+import { AuthProvider } from "@/components/AuthProvider";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -16,7 +17,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Navaloka - Platform Budaya Indonesia",
-  description: "Satu platform untuk masa depan budaya Indonesia. Menghadirkan ekosistem budaya digital yang autentik, transparan, dan berkelanjutan dengan AI & Blockchain.",
+  description:
+    "Satu platform untuk masa depan budaya Indonesia. Menghadirkan ekosistem budaya digital yang autentik, transparan, dan berkelanjutan dengan AI & Blockchain.",
 };
 
 export default function RootLayout({
@@ -35,8 +37,11 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            {children}
-            <Toaster />
+            <AuthProvider>
+              {" "}
+              {children}
+              <Toaster />
+            </AuthProvider>
           </ThemeProvider>
         </body>
       </html>

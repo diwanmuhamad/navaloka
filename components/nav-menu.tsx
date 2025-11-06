@@ -13,17 +13,17 @@ export const NavMenu = (props: ComponentProps<typeof NavigationMenu>) => (
     <NavigationMenuList className="space-x-0 data-[orientation=vertical]:flex-col data-[orientation=vertical]:items-start data-[orientation=vertical]:justify-start">
       <NavigationMenuItem>
         <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-          <Link href="#">Beranda</Link>
+          <Link href="/">Beranda</Link>
         </NavigationMenuLink>
       </NavigationMenuItem>
       <NavigationMenuItem>
         <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-          <Link href="#">Galeri Budaya</Link>
+          <Link href="/cultural-gallery">Galeri Budaya</Link>
         </NavigationMenuLink>
       </NavigationMenuItem>
       <NavigationMenuItem>
         <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-          <Link href="#">Pasar</Link>
+          <Link href="/marketplace">Lokapasar</Link>
         </NavigationMenuLink>
       </NavigationMenuItem>
       <NavigationMenuItem style={{ display: "none" }}>
@@ -33,7 +33,7 @@ export const NavMenu = (props: ComponentProps<typeof NavigationMenu>) => (
       </NavigationMenuItem>
       <NavigationMenuItem>
         <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-          <Link href="#">Hubungi Kami</Link>
+          <Link href="/contact-us">Hubungi Kami</Link>
         </NavigationMenuLink>
       </NavigationMenuItem>
     </NavigationMenuList>

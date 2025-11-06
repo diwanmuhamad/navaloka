@@ -8,13 +8,47 @@ import {
   FieldSeparator,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { useDispatch, useSelector } from "react-redux";
+import { signIn } from "@/store/authSlice";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { AppDispatch, RootState } from "@/store/store";
+import { useState } from "react";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"form">) {
+  const [loadingLogin, setLoadingLogin] = useState(false);
+  const { loading } = useSelector((state: RootState) => state.auth);
+  const dispatch = useDispatch<AppDispatch>();
+  const router = useRouter();
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoadingLogin(true);
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
+    try {
+      await dispatch(signIn({ email, password })).unwrap();
+      toast.success("Selamat anda berhasil masuk");
+      router.push("/dashboard");
+    } catch (error: any) {
+      const message =
+        error?.message ||
+        (typeof error === "string" ? error : "Terjadi kesalahan saat login");
+      toast.error(message);
+    }
+    setLoadingLogin(false);
+    // Dispatch your Redux thunk
+  };
   return (
-    <form className={cn("flex flex-col gap-6", className)} {...props}>
+    <form
+      className={cn("flex flex-col gap-6", className)}
+      {...props}
+      onSubmit={handleSubmit}
+    >
       <FieldGroup>
         <div className="flex flex-col items-center gap-1 text-center">
           <h1 className="text-2xl font-bold">Masuk ke akun Anda</h1>
@@ -24,7 +58,12 @@ export function LoginForm({
         </div>
         <Field>
           <FieldLabel htmlFor="email">Email</FieldLabel>
-          <Input id="email" type="email" placeholder="m@example.com" />
+          <Input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="m@example.com"
+          />
         </Field>
         <Field>
           <div className="flex items-center">
@@ -36,10 +75,17 @@ export function LoginForm({
               Lupa kata sandi?
             </a>
           </div>
-          <Input id="password" type="password" />
+          <Input id="password" name="password" type="password" />
         </Field>
         <Field>
-          <Button type="submit">Masuk</Button>
+          <Button
+            type="submit"
+            disabled={loadingLogin}
+            className="cursor-pointer"
+          >
+            {" "}
+            {loadingLogin ? "Sedang Proses..." : "Masuk"}
+          </Button>
         </Field>
         <FieldSeparator></FieldSeparator>
 

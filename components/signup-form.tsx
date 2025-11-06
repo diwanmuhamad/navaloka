@@ -16,6 +16,12 @@ import {
   registerSchema,
   type RegisterFormData,
 } from "@/lib/validations/authSchema";
+import { useDispatch, useSelector } from "react-redux";
+import { signUp } from "@/store/authSlice";
+import { AppDispatch, RootState } from "@/store/store";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export function SignupForm({
   className,
@@ -28,11 +34,29 @@ export function SignupForm({
   } = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
   });
+  const [loadingSignUP, setLoadingSignUP] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
+  const { loading } = useSelector((state: RootState) => state.auth);
+  const router = useRouter();
 
-  const onSubmit = (data: RegisterFormData) => {
-    console.log("Form submitted:", data);
-    // you can call Supabase signup here
+  const onSubmit = async (data: RegisterFormData) => {
+    setLoadingSignUP(true);
+    try {
+      const result = await dispatch(
+        signUp({ email: data.email, password: data.password, name: data.name })
+      ).unwrap();
+      toast.success("Selamat anda berhasil terdaftar");
+      router.push("/onboarding");
+    } catch (error: any) {
+      const message =
+        error?.message ||
+        (typeof error === "string" ? error : "Terjadi kesalahan saat login");
+      toast.error(message);
+    }
+
+    setLoadingSignUP(false);
   };
+
   return (
     <form
       className={cn("flex flex-col gap-6", className)}
@@ -82,13 +106,13 @@ export function SignupForm({
           <FieldDescription
             className={errors.password ? "text-red-500" : "text-zinc-400"}
           >
-            {errors.password
-              ? errors.password.message
-              : "Minimal 8 karakter."}
+            {errors.password ? errors.password.message : "Minimal 8 karakter."}
           </FieldDescription>
         </Field>
         <Field>
-          <FieldLabel htmlFor="confirm-password">Konfirmasi Kata Sandi</FieldLabel>
+          <FieldLabel htmlFor="confirm-password">
+            Konfirmasi Kata Sandi
+          </FieldLabel>
           <Input
             id="confirm-password"
             type="password"
@@ -103,7 +127,13 @@ export function SignupForm({
           </FieldDescription>
         </Field>
         <Field>
-          <Button type="submit">Buat Akun</Button>
+          <Button
+            type="submit"
+            disabled={loadingSignUP}
+            className="cursor-pointer"
+          >
+            {loadingSignUP ? "Sedang Proses..." : "Buat Akun"}
+          </Button>
         </Field>
         <FieldSeparator />
         <FieldDescription className="px-6 text-center">
