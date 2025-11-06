@@ -5,7 +5,7 @@ _Gambar: Tampilan halaman beranda NavaLoka yang menampilkan slogan "Budaya. Krea
 
 > **Catatan**: Simpan gambar landing page di folder `public/` dengan nama `landing-hero.png` (atau sesuaikan path di atas bila memakai nama lain/URL).
 
-## 📋 Daftar Isi
+## Daftar Isi
 
 - [Tentang NavaLoka](#tentang-navaloka)
 - [Fitur Utama](#fitur-utama)
@@ -20,7 +20,7 @@ _Gambar: Tampilan halaman beranda NavaLoka yang menampilkan slogan "Budaya. Krea
 
 ---
 
-## 🎯 Tentang NavaLoka
+## Tentang NavaLoka
 
 NavaLoka adalah platform web berbasis AI dan blockchain yang menghubungkan pelaku budaya, masyarakat, dan publik global dalam satu ekosistem digital yang menghargai, melestarikan, serta memberdayakan nilai-nilai budaya Indonesia.
 
@@ -41,7 +41,7 @@ NavaLoka menghadirkan solusi terpadu berupa **pasar budaya digital (Cultural Mar
 
 ---
 
-## ✨ Fitur Utama
+## Fitur Utama
 
 ### 1. Digital Cultural Marketplace
 
@@ -73,7 +73,7 @@ NavaLoka menghadirkan solusi terpadu berupa **pasar budaya digital (Cultural Mar
 
 ---
 
-## 🛠 Teknologi yang Digunakan
+## Teknologi yang Digunakan
 
 ### Frontend
 
@@ -106,7 +106,7 @@ NavaLoka menghadirkan solusi terpadu berupa **pasar budaya digital (Cultural Mar
 
 ---
 
-## 📊 Flow Aplikasi
+## Flow Aplikasi
 
 ### 1. User Registration & Onboarding
 
@@ -189,7 +189,7 @@ Seniman]
 
 ---
 
-## 🏗 System Architecture
+## System Architecture
 
 ```
 ┌─────────────────────────────────────┐
@@ -222,7 +222,7 @@ Seniman]
 
 ---
 
-## 🚀 Cara Menjalankan di Lokal
+## Cara Menjalankan di Lokal
 
 ### Prerequisites
 
@@ -307,7 +307,7 @@ npm run lint
 
 ---
 
-## 📁 Struktur Project
+## Struktur Project
 
 ```
 navaloka/
@@ -345,7 +345,7 @@ navaloka/
 
 ---
 
-## 🎯 Tujuan dan Manfaat
+## Tujuan dan Manfaat
 
 ### Tujuan Utama
 
@@ -381,7 +381,7 @@ NavaLoka bertujuan untuk menciptakan ekosistem digital budaya yang inklusif, ber
 
 ---
 
-## 💼 Model Bisnis
+## Model Bisnis
 
 ### Sumber Pendapatan
 
@@ -402,7 +402,7 @@ NavaLoka bertujuan untuk menciptakan ekosistem digital budaya yang inklusif, ber
 
 ---
 
-## 🔮 Pengembangan Lanjutan
+## Pengembangan Lanjutan
 
 ### Tahap Lanjutan
 
@@ -435,13 +435,13 @@ NavaLoka bertujuan untuk menciptakan ekosistem digital budaya yang inklusif, ber
 
 ---
 
-## 📄 Lisensi
+## Lisensi
 
 Proyek ini dikembangkan untuk kompetisi **BUDAYA GO! 2025 - Kompetisi Inovasi Digital Budaya Indonesia**.
 
 ---
 
-## 🙏 Terima Kasih
+## Terima Kasih
 
 Terima kasih telah melihat proyek NavaLoka! Kami berharap platform ini dapat berkontribusi dalam pelestarian dan pemberdayaan budaya Indonesia melalui teknologi modern.
 
