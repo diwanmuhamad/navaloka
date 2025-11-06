@@ -435,14 +435,6 @@ NavaLoka bertujuan untuk menciptakan ekosistem digital budaya yang inklusif, ber
 
 ---
 
-## 📞 Kontak
-
-- **Email**: diwanmuhamad37@gmail.com
-- **Telepon**: 081246505738
-- **GitHub**: [https://github.com/diwanmuhamad/navaloka](https://github.com/diwanmuhamad/navaloka)
-
----
-
 ## 📄 Lisensi
 
 Proyek ini dikembangkan untuk kompetisi **BUDAYA GO! 2025 - Kompetisi Inovasi Digital Budaya Indonesia**.
