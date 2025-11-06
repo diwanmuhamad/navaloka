@@ -1,89 +1,73 @@
-import { Button } from "@/components/ui/button";
-import { ArrowRight, Blocks, Settings2 } from "lucide-react";
+import {
+  Blocks,
+  Bot,
+  ChartPie,
+  Film,
+  MessageCircle,
+  Settings2,
+} from "lucide-react";
+
+const features = [
+  {
+    icon: Settings2,
+    title: "Customizable Layouts",
+    description:
+      "Design your space with drag-and-drop simplicity—create grids, lists, or galleries in seconds.",
+  },
+  {
+    icon: Blocks,
+    title: "Interactive Widgets",
+    description:
+      "Embed polls, quizzes, or forms to keep your audience engaged.",
+  },
+  {
+    icon: Bot,
+    title: "AI-Powered Tools",
+    description:
+      "Generate summaries, auto-format content, or translate into multiple languages seamlessly.",
+  },
+  {
+    icon: Film,
+    title: "Media Integrations",
+    description:
+      "Connect with Spotify, Instagram, or your own media library for dynamic visuals and sound.",
+  },
+  {
+    icon: ChartPie,
+    title: "Advanced Analytics",
+    description:
+      "Track engagement, clicks, and user activity with intuitive charts and reports.",
+  },
+  {
+    icon: MessageCircle,
+    title: "Seamless Collaboration",
+    description:
+      "Comment, tag, and assign tasks directly within your documents.",
+  },
+];
 
 const Features = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="w-full max-w-(--breakpoint-lg) mx-auto py-12 px-6">
-        <h2 className="text-3xl leading-10 sm:text-4xl md:text-[40px] md:leading-13 font-semibold tracking-tight">
-          Design and Engage: <br />
-          Build Smarter Spaces and Strategies
+    <div className="min-h-screen flex items-center justify-center py-12">
+      <div>
+        <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight text-center">
+          Unleash Your Creativity
         </h2>
-        <div className="mt-8 grid sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-3 gap-6">
-          {/* Card 1 */}
-          <div className="bg-muted rounded-xl p-6 col-span-1 md:col-span-2 lg:col-span-1">
-            {/* Media 1 Mobile */}
-            <div className="md:hidden mb-6 aspect-video w-full bg-background rounded-xl"></div>
-
-            <span className="text-xl font-semibold tracking-tight">
-              Plan Smarter
-            </span>
-
-            <ul className="mt-6 space-y-4">
-              <li>
-                <div className="flex items-start gap-3">
-                  <Settings2 className="shrink-0" />
-                  <p className="-mt-0.5">
-                    Design your space with drag-and-drop simplicity—create
-                    grids, lists, or galleries in seconds.
-                  </p>
-                </div>
-              </li>
-              <li>
-                <div className="flex items-start gap-3">
-                  <Blocks className="shrink-0" />
-                  <p className="-mt-0.5">
-                    Embed polls, quizzes, or forms to keep your audience
-                    engaged.
-                  </p>
-                </div>
-              </li>
-            </ul>
-
-            <Button className="mt-8 w-full">
-              Build your strategy <ArrowRight />
-            </Button>
-          </div>
-          {/* Media 1 Desktop */}
-          <div className="hidden md:block bg-muted rounded-xl col-span-1 md:col-span-3 lg:col-span-2"></div>
-
-          {/* Media 2 Desktop */}
-          <div className="hidden md:block bg-muted rounded-xl col-span-1 md:col-span-3 lg:col-span-2"></div>
-
-          {/* Card 2 */}
-          <div className="bg-muted rounded-xl p-6 col-span-1 md:col-span-2 lg:col-span-1">
-            {/* Media 2 Mobile */}
-            <div className="md:hidden mb-6 aspect-video w-full bg-background rounded-xl"></div>
-
-            <span className="text-xl font-semibold tracking-tight">
-              Plan Smarter
-            </span>
-
-            <ul className="mt-6 space-y-4">
-              <li>
-                <div className="flex items-start gap-3">
-                  <Settings2 className="shrink-0" />
-                  <p className="-mt-0.5">
-                    Design your space with drag-and-drop simplicity—create
-                    grids, lists, or galleries in seconds.
-                  </p>
-                </div>
-              </li>
-              <li>
-                <div className="flex items-start gap-3">
-                  <Blocks className="shrink-0" />
-                  <p className="-mt-0.5">
-                    Embed polls, quizzes, or forms to keep your audience
-                    engaged.
-                  </p>
-                </div>
-              </li>
-            </ul>
-
-            <Button className="mt-8 w-full">
-              Build your strategy <ArrowRight />
-            </Button>
-          </div>
+        <div className="mt-10 sm:mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-(--breakpoint-lg) mx-auto px-6">
+          {features.map((feature) => (
+            <div
+              key={feature.title}
+              className="flex flex-col border rounded-xl py-6 px-5"
+            >
+              <div className="mb-4 h-10 w-10 flex items-center justify-center bg-muted rounded-full">
+                <feature.icon className="size-5" />
+              </div>
+              <span className="text-lg font-semibold">{feature.title}</span>
+              <p className="mt-1 text-foreground/80 text-[15px]">
+                {feature.description}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
