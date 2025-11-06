@@ -19,7 +19,7 @@ const Navbar = () => {
           >
             Masuk
           </Button>
-          <Button className="rounded-full">Mulai Sekarang</Button>
+          <Button className="rounded-full">Daftar</Button>
 
           {/* Mobile Menu */}
           <div className="md:hidden">

@@ -26,14 +26,14 @@ export const NavMenu = (props: ComponentProps<typeof NavigationMenu>) => (
           <Link href="#">Pasar</Link>
         </NavigationMenuLink>
       </NavigationMenuItem>
-      <NavigationMenuItem>
+      <NavigationMenuItem style={{ display: "none" }}>
         <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-          <Link href="#">Hubungi Kami</Link>
+          <Link href="#">Hidden Menu</Link>
         </NavigationMenuLink>
       </NavigationMenuItem>
       <NavigationMenuItem>
         <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-          <Link href="#">Test</Link>
+          <Link href="#">Hubungi Kami</Link>
         </NavigationMenuLink>
       </NavigationMenuItem>
     </NavigationMenuList>
