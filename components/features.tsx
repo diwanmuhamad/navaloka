@@ -10,39 +10,39 @@ import {
 const features = [
   {
     icon: Settings2,
-    title: "Customizable Layouts",
+    title: "Tata Letak yang Dapat Disesuaikan",
     description:
-      "Design your space with drag-and-drop simplicity—create grids, lists, or galleries in seconds.",
+      "Desain ruang Anda dengan kesederhanaan drag-and-drop—buat grid, daftar, atau galeri dalam hitungan detik.",
   },
   {
     icon: Blocks,
-    title: "Interactive Widgets",
+    title: "Widget Interaktif",
     description:
-      "Embed polls, quizzes, or forms to keep your audience engaged.",
+      "Sematkan polling, kuis, atau formulir untuk menjaga audiens tetap terlibat.",
   },
   {
     icon: Bot,
-    title: "AI-Powered Tools",
+    title: "Alat Berbasis AI",
     description:
-      "Generate summaries, auto-format content, or translate into multiple languages seamlessly.",
+      "Buat ringkasan, format konten otomatis, atau terjemahkan ke berbagai bahasa dengan mulus.",
   },
   {
     icon: Film,
-    title: "Media Integrations",
+    title: "Integrasi Media",
     description:
-      "Connect with Spotify, Instagram, or your own media library for dynamic visuals and sound.",
+      "Terhubung dengan Spotify, Instagram, atau perpustakaan media Anda sendiri untuk visual dan suara yang dinamis.",
   },
   {
     icon: ChartPie,
-    title: "Advanced Analytics",
+    title: "Analitik Lanjutan",
     description:
-      "Track engagement, clicks, and user activity with intuitive charts and reports.",
+      "Lacak keterlibatan, klik, dan aktivitas pengguna dengan bagan dan laporan yang intuitif.",
   },
   {
     icon: MessageCircle,
-    title: "Seamless Collaboration",
+    title: "Kolaborasi Tanpa Hambatan",
     description:
-      "Comment, tag, and assign tasks directly within your documents.",
+      "Komentar, tag, dan tetapkan tugas langsung di dalam dokumen Anda.",
   },
 ];
 
@@ -51,7 +51,7 @@ const Features = () => {
     <div className="min-h-screen flex items-center justify-center py-12">
       <div>
         <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight text-center">
-          Unleash Your Creativity
+          Lepaskan Kreativitas Anda
         </h2>
         <div className="mt-10 sm:mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-(--breakpoint-lg) mx-auto px-6">
           {features.map((feature) => (

@@ -5,7 +5,7 @@ import { NavigationSheet } from "@/components/navigation-sheet";
 
 const Navbar = () => {
   return (
-    <nav className="fixed top-6 inset-x-4 h-16 bg-background border max-w-(--breakpoint-xl) mx-auto rounded-full">
+    <nav className="fixed top-6 inset-x-4 h-16 bg-background border max-w-(--breakpoint-xl) mx-auto rounded-full z-50">
       <div className="h-full flex items-center justify-between mx-auto px-4">
         <Logo />
 
@@ -17,9 +17,9 @@ const Navbar = () => {
             variant="outline"
             className="hidden sm:inline-flex rounded-full"
           >
-            Sign In
+            Masuk
           </Button>
-          <Button className="rounded-full">Get Started</Button>
+          <Button className="rounded-full">Mulai Sekarang</Button>
 
           {/* Mobile Menu */}
           <div className="md:hidden">

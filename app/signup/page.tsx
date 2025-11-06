@@ -23,7 +23,7 @@ export default function SignupPage() {
       <div className="bg-muted relative hidden lg:block">
         <img
           src="/placeholder.svg"
-          alt="Image"
+          alt="Gambar"
           className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
         />
       </div>

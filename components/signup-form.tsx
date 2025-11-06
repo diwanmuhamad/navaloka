@@ -41,17 +41,17 @@ export function SignupForm({
     >
       <FieldGroup>
         <div className="flex flex-col items-center gap-1 text-center">
-          <h1 className="text-2xl font-bold">Create your account</h1>
+          <h1 className="text-2xl font-bold">Buat akun Anda</h1>
           <p className="text-muted-foreground text-sm text-balance">
-            Fill in the form below to create your account
+            Isi formulir di bawah untuk membuat akun
           </p>
         </div>
         <Field>
-          <FieldLabel htmlFor="name">Full Name</FieldLabel>
+          <FieldLabel htmlFor="name">Nama Lengkap</FieldLabel>
           <Input
             id="name"
             type="text"
-            placeholder="John Doe"
+            placeholder="Nama Lengkap"
             {...register("name")}
           />
           {errors.name && (
@@ -73,22 +73,22 @@ export function SignupForm({
           >
             {errors.email
               ? errors.email.message
-              : "We'll use this to contact you. We will not share your email with anyone else."}
+              : "Kami akan menggunakan ini untuk menghubungi Anda. Kami tidak akan membagikan email Anda kepada siapapun."}
           </FieldDescription>
         </Field>
         <Field>
-          <FieldLabel htmlFor="password">Password</FieldLabel>
+          <FieldLabel htmlFor="password">Kata Sandi</FieldLabel>
           <Input id="password" type="password" {...register("password")} />
           <FieldDescription
             className={errors.password ? "text-red-500" : "text-zinc-400"}
           >
             {errors.password
               ? errors.password.message
-              : "Must be at least 8 characters long."}
+              : "Minimal 8 karakter."}
           </FieldDescription>
         </Field>
         <Field>
-          <FieldLabel htmlFor="confirm-password">Confirm Password</FieldLabel>
+          <FieldLabel htmlFor="confirm-password">Konfirmasi Kata Sandi</FieldLabel>
           <Input
             id="confirm-password"
             type="password"
@@ -103,11 +103,11 @@ export function SignupForm({
           </FieldDescription>
         </Field>
         <Field>
-          <Button type="submit">Create Account</Button>
+          <Button type="submit">Buat Akun</Button>
         </Field>
         <FieldSeparator />
         <FieldDescription className="px-6 text-center">
-          Already have an account? <a href="/login">Sign in</a>
+          Sudah punya akun? <a href="/login">Masuk</a>
         </FieldDescription>
       </FieldGroup>
     </form>

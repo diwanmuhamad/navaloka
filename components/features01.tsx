@@ -1,15 +1,15 @@
 const features = [
   {
-    title: "Identify Opportunities",
-    description: "Find untapped areas to explore effortlessly.",
+    title: "Identifikasi Peluang",
+    description: "Temukan area yang belum terjamah untuk dieksplorasi dengan mudah.",
   },
   {
-    title: "Build Authority",
-    description: "Craft content that resonates and inspires trust.",
+    title: "Bangun Otoritas",
+    description: "Buat konten yang beresonansi dan menginspirasi kepercayaan.",
   },
   {
-    title: "Instant Insights",
-    description: "Get actionable insights instantly at a glance.",
+    title: "Wawasan Instan",
+    description: "Dapatkan wawasan yang dapat ditindaklanjuti secara instan sekilas.",
   },
 ];
 
@@ -18,7 +18,7 @@ const Features = () => {
     <div className="min-h-screen flex items-center justify-center py-12 px-6">
       <div className="grow w-full sm:max-w-(--breakpoint-md) lg:max-w-(--breakpoint-lg)">
         <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight">
-          Ignite Your Imagination
+          Nyalakan Imajinasi Anda
         </h2>
         <div className="w-full mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
           {features.map((feature) => (

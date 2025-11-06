@@ -5,10 +5,10 @@ const Contact = () => (
   <div className="min-h-screen flex items-center justify-center">
     <div className="text-center">
       <h2 className="mt-3 text-2xl md:text-4xl font-semibold tracking-tight">
-        Get In Touch
+        Hubungi Kami
       </h2>
       <p className="mt-4 text-base sm:text-lg text-muted-foreground">
-        Our friendly team is always here to chat.
+        Tim ramah kami selalu siap membantu Anda.
       </p>
       <div className="max-w-(--breakpoint-xl) mx-auto py-24 grid md:grid-cols-2 lg:grid-cols-3 gap-16 md:gap-10 px-6 md:px-0">
         <div className="text-center flex flex-col items-center">
@@ -17,7 +17,7 @@ const Contact = () => (
           </div>
           <h3 className="mt-6 font-semibold text-xl">Email</h3>
           <p className="mt-2 text-muted-foreground">
-            Our friendly team is here to help.
+            Tim ramah kami siap membantu Anda.
           </p>
           <Link
             className="mt-4 font-medium text-primary"
@@ -30,9 +30,9 @@ const Contact = () => (
           <div className="h-12 w-12 flex items-center justify-center bg-primary/5 dark:bg-primary/10 text-primary rounded-full">
             <MapPinIcon />
           </div>
-          <h3 className="mt-6 font-semibold text-xl">Office</h3>
+          <h3 className="mt-6 font-semibold text-xl">Kantor</h3>
           <p className="mt-2 text-muted-foreground">
-            Come say hello at our office HQ.
+            Datang dan sapa kami di kantor pusat kami.
           </p>
           <Link
             className="mt-4 font-medium text-primary"
@@ -46,8 +46,8 @@ const Contact = () => (
           <div className="h-12 w-12 flex items-center justify-center bg-primary/5 dark:bg-primary/10 text-primary rounded-full">
             <PhoneIcon />
           </div>
-          <h3 className="mt-6 font-semibold text-xl">Phone</h3>
-          <p className="mt-2 text-muted-foreground">Mon-Fri from 8am to 5pm.</p>
+          <h3 className="mt-6 font-semibold text-xl">Telepon</h3>
+          <p className="mt-2 text-muted-foreground">Senin-Jumat dari jam 8 pagi hingga 5 sore.</p>
           <Link
             className="mt-4 font-medium text-primary"
             href="tel:akashmoradiya3444@gmail.com"

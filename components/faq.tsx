@@ -7,29 +7,29 @@ import {
 
 const faq = [
   {
-    question: "What is your return policy?",
+    question: "Apa kebijakan pengembalian Anda?",
     answer:
-      "You can return unused items in their original packaging within 30 days for a refund or exchange. Contact support for assistance.",
+      "Anda dapat mengembalikan barang yang belum digunakan dalam kemasan aslinya dalam 30 hari untuk pengembalian dana atau penukaran. Hubungi dukungan untuk bantuan.",
   },
   {
-    question: "How do I track my order?",
+    question: "Bagaimana cara melacak pesanan saya?",
     answer:
-      "Track your order using the link provided in your confirmation email, or log into your account to view tracking details.",
+      "Lacak pesanan Anda menggunakan tautan yang disediakan dalam email konfirmasi, atau masuk ke akun Anda untuk melihat detail pelacakan.",
   },
   {
-    question: "Do you ship internationally?",
+    question: "Apakah Anda mengirim ke luar negeri?",
     answer:
-      "Yes, we ship worldwide. Shipping fees and delivery times vary by location, and customs duties may apply for some countries.",
+      "Ya, kami mengirim ke seluruh dunia. Biaya pengiriman dan waktu pengiriman bervariasi berdasarkan lokasi, dan bea cukai mungkin berlaku untuk beberapa negara.",
   },
   {
-    question: "What payment methods do you accept?",
+    question: "Metode pembayaran apa yang Anda terima?",
     answer:
-      "We accept Visa, MasterCard, American Express, PayPal, Apple Pay, and Google Pay, ensuring secure payment options for all customers.",
+      "Kami menerima Visa, MasterCard, American Express, PayPal, Apple Pay, dan Google Pay, memastikan opsi pembayaran yang aman untuk semua pelanggan.",
   },
   {
-    question: "What if I receive a damaged item?",
+    question: "Bagaimana jika saya menerima barang yang rusak?",
     answer:
-      "Please contact our support team within 48 hours of delivery with photos of the damaged item. We’ll arrange a replacement or refund.",
+      "Silakan hubungi tim dukungan kami dalam 48 jam setelah pengiriman dengan foto barang yang rusak. Kami akan mengatur penggantian atau pengembalian dana.",
   },
 ];
 
@@ -38,7 +38,7 @@ const FAQ = () => {
     <div className="min-h-screen flex items-center justify-center px-6 py-12">
       <div className="flex flex-col md:flex-row items-start gap-x-12 gap-y-6">
         <h2 className="text-4xl lg:text-5xl leading-[1.15]! font-semibold tracking-tighter">
-          Frequently Asked <br /> Questions
+          Pertanyaan yang <br /> Sering Diajukan
         </h2>
 
         <Accordion type="single" defaultValue="question-0" className="max-w-xl">
