@@ -1,11 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { motion, easeOut } from "framer-motion";
-import { BackgroundPattern } from "@/components/background-pattern";
-import { ShoppingCart, MessageCircle, Image as ImageIcon } from "lucide-react";
+import { Image } from "lucide-react";
 import Navbar from "@/components/navbar";
+import { BackgroundPattern } from "@/components/background-pattern";
 import Footer from "@/components/footer";
+
+const HEIGHT_OPTIONS = [
+  520, 380, 620, 460, 500, 540, 580, 620, 660, 700, 400, 300, 440, 700, 520,
+  560, 600, 640, 680,
+];
 
 // Animation variants
 const containerVariants = {
@@ -34,12 +39,24 @@ interface Karya {
   image_url?: string;
   artist_name?: string;
   description?: string;
+  highlight?: string;
 }
 
 export default function MarketplacePage() {
   const [karyaList, setKaryaList] = useState<Karya[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+  const layoutMap = useMemo(() => {
+    const map = new Map<string, { height: number; spanAll: boolean }>();
+    karyaList.forEach((karya, index) => {
+      map.set(karya.id, {
+        height: HEIGHT_OPTIONS[index % HEIGHT_OPTIONS.length],
+        spanAll: false,
+      });
+    });
+    return map;
+  }, [karyaList]);
 
   useEffect(() => {
     fetchKarya();
@@ -48,24 +65,20 @@ export default function MarketplacePage() {
   const fetchKarya = async () => {
     try {
       setLoading(true);
-      // TODO: Replace with actual Supabase query
-      // const { data, error } = await supabase
-      //   .from('karya')
-      //   .select('*')
-      //   .eq('is_published', true)
-      //   .order('created_at', { ascending: false });
 
-      // Mock data for now - replace with actual data from Supabase
       const mockKarya: Karya[] = [
         {
           id: "1",
           title: "Wayang Kulit Modern",
           category: "2D",
           medium: "Kulit Sapi, Cat Akrilik",
-          dimensions: "30\" x 24\"",
+          dimensions: '30" x 24"',
           price: 2500000,
           artist_name: "Budi Santoso",
           description: "Karya wayang kulit kontemporer dengan sentuhan modern",
+          highlight: "Pilihan Kurator",
+          image_url:
+            "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1200&q=80",
         },
         {
           id: "2",
@@ -76,6 +89,9 @@ export default function MarketplacePage() {
           price: 3500000,
           artist_name: "Siti Nurhaliza",
           description: "Batik tulis tradisional dengan motif nusantara",
+          highlight: "Best in Show - 2D",
+          image_url:
+            "https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=1200&q=80",
         },
         {
           id: "3",
@@ -86,16 +102,22 @@ export default function MarketplacePage() {
           price: 15000000,
           artist_name: "Ahmad Wijaya",
           description: "Patung garuda dengan detail ukiran tradisional",
+          highlight: "First Place - 3D",
+          image_url:
+            "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80",
         },
         {
           id: "4",
           title: "Lukisan Pemandangan Bali",
           category: "2D",
           medium: "Cat Minyak di Kanvas",
-          dimensions: "60\" x 40\"",
+          dimensions: '60" x 40"',
           price: 4500000,
           artist_name: "Ketut Surya",
           description: "Lukisan pemandangan sawah terasering di Bali",
+          highlight: "People's Choice",
+          image_url:
+            "https://images.unsplash.com/photo-1526481280695-3c46917f14dd?auto=format&fit=crop&w=1200&q=80",
         },
         {
           id: "5",
@@ -106,6 +128,9 @@ export default function MarketplacePage() {
           price: 1200000,
           artist_name: "Dewi Lestari",
           description: "Keramik dengan motif dan bentuk gaya Majapahit",
+          highlight: "Honorable Mention",
+          image_url:
+            "https://images.unsplash.com/photo-1457374258525-8560d3b5c2ed?auto=format&fit=crop&w=1200&q=80",
         },
         {
           id: "6",
@@ -116,6 +141,9 @@ export default function MarketplacePage() {
           price: 2800000,
           artist_name: "Maria Wunga",
           description: "Tenun ikat tradisional Sumba dengan motif kuda",
+          highlight: "Second Place - 2D",
+          image_url:
+            "https://images.unsplash.com/photo-1617032449332-5616b0dcd389?auto=format&fit=crop&w=1200&q=80",
         },
         {
           id: "7",
@@ -126,6 +154,9 @@ export default function MarketplacePage() {
           price: 850000,
           artist_name: "Joko Prasetyo",
           description: "Topeng tradisional Malang dengan karakter wayang",
+          highlight: "Favorite of the Week",
+          image_url:
+            "https://images.unsplash.com/photo-1516349935484-a69b0b87f519?auto=format&fit=crop&w=1200&q=80",
         },
         {
           id: "8",
@@ -136,10 +167,12 @@ export default function MarketplacePage() {
           price: 3200000,
           artist_name: "Ahmad Fauzi",
           description: "Kaligrafi dengan gaya Arab-Jawa yang unik",
+          highlight: "Editor's Pick",
+          image_url:
+            "https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=1200&q=80",
         },
       ];
 
-      // Simulate API delay
       await new Promise((resolve) => setTimeout(resolve, 500));
       setKaryaList(mockKarya);
     } catch (error) {
@@ -168,13 +201,7 @@ export default function MarketplacePage() {
       : karyaList.filter((k) => k.category === selectedCategory);
 
   const handleBuy = (karya: Karya) => {
-    // TODO: Implement buy functionality
     console.log("Buying:", karya);
-  };
-
-  const handleInquire = (karya: Karya) => {
-    // TODO: Implement inquire functionality
-    console.log("Inquiring about:", karya);
   };
 
   return (
@@ -202,13 +229,14 @@ export default function MarketplacePage() {
               className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tighter mb-4"
               variants={fadeUp}
             >
-              Lokapasar Karya Budaya
+              Lokapasar Karya
             </motion.h1>
             <motion.p
               className="text-foreground/80 md:text-lg max-w-2xl mx-auto"
               variants={fadeUp}
             >
-              Jelajahi koleksi karya budaya Indonesia yang autentik dan bermakna
+              Jelajahi koleksi karya seniman Indonesia yang autentik dan
+              bermakna
             </motion.p>
           </motion.div>
 
@@ -243,127 +271,130 @@ export default function MarketplacePage() {
 
           {/* Loading State */}
           {loading ? (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {[...Array(6)].map((_, i) => (
-                <div
-                  key={i}
-                  className="rounded-3xl border border-slate-200/80 dark:border-slate-800/70 bg-white/70 dark:bg-slate-950/40 p-6 backdrop-blur-sm shadow-sm animate-pulse"
-                >
-                  <div className="flex flex-col sm:flex-row gap-6">
-                    <div className="sm:w-2/5 aspect-square rounded-2xl bg-slate-200/70 dark:bg-slate-800" />
-                    <div className="flex-1 space-y-4">
-                      <div className="h-5 w-3/4 rounded bg-slate-200/70 dark:bg-slate-800" />
-                      <div className="h-4 w-1/2 rounded bg-slate-200/70 dark:bg-slate-800" />
-                      <div className="h-4 w-full rounded bg-slate-200/70 dark:bg-slate-800" />
-                      <div className="h-10 w-2/3 rounded bg-slate-200/70 dark:bg-slate-800" />
+            <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6">
+              {[...Array(9)].map((_, i) => {
+                const skeletonHeight =
+                  HEIGHT_OPTIONS[i % HEIGHT_OPTIONS.length];
+                const spanAll = (i + 1) % 5 === 0;
+                return (
+                  <div
+                    key={i}
+                    className="mb-6 animate-pulse break-inside-avoid"
+                    style={{
+                      columnSpan: spanAll ? "all" : "none",
+                    }}
+                  >
+                    <div
+                      className="w-full bg-slate-200/70 dark:bg-slate-800 rounded-lg"
+                      style={{ height: `${skeletonHeight}px` }}
+                    />
+                    <div className="mt-4 space-y-2">
+                      <div className="h-3 w-3/4 bg-slate-200/70 dark:bg-slate-800 rounded" />
+                      <div className="h-3 w-1/2 bg-slate-200/70 dark:bg-slate-800 rounded" />
+                      <div className="h-3 w-full bg-slate-200/70 dark:bg-slate-800 rounded" />
+                      <div className="h-3 w-2/3 bg-slate-200/70 dark:bg-slate-800 rounded" />
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           ) : (
-            /* Karya Grid */
+            /* Karya Masonry Grid */
             <motion.div
-              className="grid grid-cols-1 lg:grid-cols-2 gap-6"
+              className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6"
               variants={containerVariants}
               initial="hidden"
               animate="show"
             >
-              {filteredKarya.map((karya) => (
-                <motion.article
-                  key={karya.id}
-                  variants={fadeUp}
-                  className="group relative overflow-hidden rounded-3xl border border-slate-200/80 dark:border-slate-800/70 bg-white/80 dark:bg-slate-950/40 p-6 backdrop-blur-md shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl"
-                >
-                  <div className="flex flex-col sm:flex-row gap-6">
-                    <div className="sm:w-2/5">
-                      <div className="relative aspect-square rounded-2xl overflow-hidden bg-slate-200/70 dark:bg-slate-900/60 ring-1 ring-white/40 dark:ring-white/10">
-                        {karya.image_url ? (
-                          <img
-                            src={karya.image_url}
-                            alt={karya.title}
-                            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                          />
-                        ) : (
-                          <div className="h-full w-full flex items-center justify-center">
-                            <ImageIcon className="h-12 w-12 text-slate-400" />
-                          </div>
-                        )}
-                        <span
-                          className={`absolute top-3 right-3 inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] ${
-                            categoryStyles[karya.category] ??
-                            "text-slate-700 bg-slate-200/80 dark:text-slate-300 dark:bg-slate-700/30"
-                          }`}
-                        >
-                          {karya.category}
-                        </span>
-                      </div>
+              {filteredKarya.map((karya) => {
+                const layout = layoutMap.get(karya.id) || {
+                  height: 400,
+                  spanAll: false,
+                };
+                return (
+                  <motion.article
+                    key={karya.id}
+                    variants={fadeUp}
+                    className="break-inside-avoid mb-6"
+                    style={{
+                      columnSpan: layout.spanAll ? "all" : "none",
+                    }}
+                  >
+                    <div
+                      className="relative overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300"
+                      style={{
+                        height: karya.image_url
+                          ? `${layout.height}px`
+                          : "300px",
+                      }}
+                    >
+                      {karya.image_url ? (
+                        <img
+                          src={karya.image_url}
+                          alt={karya.title}
+                          className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                        />
+                      ) : (
+                        <div className="flex h-full w-full items-center justify-center bg-slate-200/70 dark:bg-slate-900/60">
+                          <Image className="h-12 w-12 text-slate-400" />
+                        </div>
+                      )}
+                      <span
+                        className={`absolute top-4 left-4 inline-flex items-center rounded-sm px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.25em] ${
+                          categoryStyles[karya.category] ??
+                          "text-slate-900 bg-white/80 dark:text-slate-200 dark:bg-slate-900/70"
+                        }`}
+                      >
+                        {karya.category}
+                      </span>
                     </div>
 
-                    <div className="flex-1 flex flex-col justify-between">
-                      <div className="space-y-4">
-                        <div className="space-y-2">
-                          <h3 className="text-2xl font-semibold tracking-tight text-slate-900 dark:text-slate-100">
-                            {karya.title}
-                          </h3>
-                          {karya.artist_name && (
-                            <p className="text-sm font-medium text-slate-600 dark:text-slate-300">
-                              {karya.artist_name}
-                            </p>
-                          )}
-                        </div>
+                    <div className="mt-4 space-y-2">
+                      {karya.highlight && (
+                        <p className="text-[11px] uppercase tracking-[0.35em] text-slate-500 dark:text-slate-400">
+                          {karya.highlight}
+                        </p>
+                      )}
 
-                        {karya.description && (
-                          <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-300 line-clamp-3">
-                            {karya.description}
-                          </p>
-                        )}
+                      <h3 className="text-base font-semibold tracking-tight text-slate-900 dark:text-slate-100">
+                        {karya.title}
+                      </h3>
 
-                        <dl className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-                          <div className="rounded-2xl border border-slate-200/80 dark:border-slate-800/60 bg-white/60 dark:bg-slate-900/40 px-4 py-3">
-                            <dt className="text-xs uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
-                              Medium
-                            </dt>
-                            <dd className="mt-1 text-slate-700 dark:text-slate-200">
-                              {karya.medium}
-                            </dd>
-                          </div>
-                          <div className="rounded-2xl border border-slate-200/80 dark:border-slate-800/60 bg-white/60 dark:bg-slate-900/40 px-4 py-3">
-                            <dt className="text-xs uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
-                              Dimensi
-                            </dt>
-                            <dd className="mt-1 text-slate-700 dark:text-slate-200">
-                              {karya.dimensions}
-                            </dd>
-                          </div>
-                        </dl>
+                      {karya.artist_name && (
+                        <p className="text-xs text-slate-600 dark:text-slate-300">
+                          {karya.artist_name}
+                        </p>
+                      )}
+
+                      {karya.description && (
+                        <p className="text-xs leading-relaxed text-slate-600 dark:text-slate-300 line-clamp-2">
+                          {karya.description}
+                        </p>
+                      )}
+
+                      <div className="flex flex-wrap gap-3 text-[11px] uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400">
+                        <span>{karya.medium}</span>
+                        <span>•</span>
+                        <span>{karya.dimensions}</span>
                       </div>
 
-                      <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
-                        <p className="text-2xl font-semibold text-slate-900 dark:text-slate-100">
+                      <div className="flex flex-wrap items-center gap-3 pt-2">
+                        <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">
                           {formatPrice(karya.price)}
                         </p>
-                        <div className="flex flex-wrap gap-3">
+                        <div className="flex gap-2 text-[11px] font-semibold uppercase tracking-[0.25em]">
                           <button
                             onClick={() => handleBuy(karya)}
-                            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-slate-900 to-slate-700 px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-slate-900/20 transition-transform duration-200 hover:scale-105 hover:shadow-xl dark:from-slate-100 dark:to-slate-200 dark:text-slate-900"
+                            className="inline-flex items-center gap-1 border border-slate-900 px-3 py-1 text-slate-900 transition-colors duration-150 hover:bg-slate-900 hover:text-white dark:border-slate-200 dark:text-slate-200 dark:hover:bg-slate-200 dark:hover:text-slate-900"
                           >
-                            <ShoppingCart className="h-4 w-4" />
-                            Beli
-                          </button>
-                          <button
-                            onClick={() => handleInquire(karya)}
-                            className="inline-flex items-center gap-2 rounded-full border border-slate-300 px-5 py-2 text-sm font-semibold text-slate-700 transition-all duration-200 hover:border-slate-900 hover:text-slate-900 dark:border-slate-700 dark:text-slate-200 dark:hover:border-slate-300 dark:hover:text-slate-100"
-                          >
-                            <MessageCircle className="h-4 w-4" />
-                            Tanya
+                            Buy
                           </button>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </motion.article>
-              ))}
+                  </motion.article>
+                );
+              })}
             </motion.div>
           )}
 
@@ -400,4 +431,3 @@ export default function MarketplacePage() {
     </>
   );
 }
-
