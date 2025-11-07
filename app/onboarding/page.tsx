@@ -8,7 +8,7 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
-import { Briefcase, Globe, Factory, ArrowRight } from "lucide-react";
+import { ShoppingCart, Globe, BookOpen, ArrowRight } from "lucide-react";
 import { motion, easeOut } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useDispatch, useSelector } from "react-redux";
@@ -82,14 +82,14 @@ export default function OnboardingPage() {
       title: "Jual Karya",
       description:
         "Jual karya kreatifmu dan perkenalkan ke audiens yang tepat.",
-      icon: Briefcase,
+      icon: ShoppingCart,
       color: "violet",
     },
     {
       id: "preserver",
       title: "Preserve Budaya",
       description: "Lestarikan budaya dan karya tradisional agar tetap hidup.",
-      icon: Factory,
+      icon: BookOpen,
       color: "violet",
     },
   ];
