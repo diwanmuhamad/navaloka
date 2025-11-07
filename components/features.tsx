@@ -1,3 +1,5 @@
+"use client";
+import { motion } from "framer-motion";
 import {
   Blocks,
   Bot,
@@ -46,6 +48,25 @@ const features = [
   },
 ];
 
+// animation variants for container + cards
+const containerVariants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 40 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" as const },
+  },
+};
+
 const Features = () => {
   return (
     <div className="min-h-screen flex items-center justify-center py-12">
@@ -53,22 +74,35 @@ const Features = () => {
         <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight text-center">
           Lepaskan Kreativitas Anda
         </h2>
-        <div className="mt-10 sm:mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-(--breakpoint-lg) mx-auto px-6">
+
+        {/* Animated grid */}
+        <motion.div
+          className="mt-10 sm:mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-(--breakpoint-lg) mx-auto px-6"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+        >
           {features.map((feature) => (
-            <div
+            <motion.div
               key={feature.title}
-              className="flex flex-col border rounded-xl py-6 px-5"
+              variants={cardVariants}
+              className="flex flex-col border rounded-xl py-6 px-5 hover:shadow-lg transition-shadow"
             >
-              <div className="mb-4 h-10 w-10 flex items-center justify-center bg-muted rounded-full">
+              <motion.div
+                className="mb-4 h-10 w-10 flex items-center justify-center bg-muted rounded-full"
+                whileHover={{ scale: 1.15, rotate: 10 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
                 <feature.icon className="size-5" />
-              </div>
+              </motion.div>
               <span className="text-lg font-semibold">{feature.title}</span>
               <p className="mt-1 text-foreground/80 text-[15px]">
                 {feature.description}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </div>
   );
