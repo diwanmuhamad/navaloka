@@ -16,9 +16,9 @@ import {
   registerSchema,
   type RegisterFormData,
 } from "@/lib/validations/authSchema";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { signUp } from "@/store/authSlice";
-import { AppDispatch, RootState } from "@/store/store";
+import { AppDispatch } from "@/store/store";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -36,13 +36,12 @@ export function SignupForm({
   });
   const [loadingSignUP, setLoadingSignUP] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
-  const { loading } = useSelector((state: RootState) => state.auth);
   const router = useRouter();
 
   const onSubmit = async (data: RegisterFormData) => {
     setLoadingSignUP(true);
     try {
-      const result = await dispatch(
+      await dispatch(
         signUp({ email: data.email, password: data.password, name: data.name })
       ).unwrap();
       toast.success("Selamat anda berhasil terdaftar");

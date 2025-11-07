@@ -32,7 +32,18 @@ export const signUp = createAsyncThunk(
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
-      options: { data: { role: "user", name: name } },
+      options: { data: { role: null, name: name } },
+    });
+    if (error) throw error;
+    return data.user;
+  }
+);
+
+export const changeUserRole = createAsyncThunk(
+  "auth/changeUserRole",
+  async ({ newRole }: { newRole: string }) => {
+    const { data, error } = await supabase.auth.updateUser({
+      data: { role: newRole },
     });
     if (error) throw error;
     return data.user;
