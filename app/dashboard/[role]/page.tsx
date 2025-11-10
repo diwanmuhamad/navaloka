@@ -1,6 +1,9 @@
 "use client";
 
 import { use } from "react";
+import UserDashboardComponents from "@/components/user-dashboard/UserDashboardComponents";
+import SellerDashboardComponents from "@/components/user-dashboard/UserDashboardComponents";
+import PreserverDashboardComponents from "@/components/user-dashboard/UserDashboardComponents";
 
 export default function DashboardPage({
   params,
@@ -9,5 +12,7 @@ export default function DashboardPage({
 }) {
   const { role } = use(params);
 
-  return <div>My Post: {role}</div>;
+  if (role === "user") return <UserDashboardComponents />;
+  if (role === "seller") return <SellerDashboardComponents />;
+  if (role === "preserver") return <PreserverDashboardComponents />;
 }
