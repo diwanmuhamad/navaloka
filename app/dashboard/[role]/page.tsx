@@ -1,8 +1,13 @@
-export default async function DashboardPage({
+"use client";
+
+import { use } from "react";
+
+export default function DashboardPage({
   params,
 }: {
-  params: Promise<{ role: string }>
+  params: Promise<{ role: string }>;
 }) {
-  const { role } = await params
-  return <div>My Post: {role}</div>
+  const { role } = use(params);
+
+  return <div>My Post: {role}</div>;
 }
