@@ -1,8 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./authSlice";
+import artworkReducer from "./artWorkSlice";
 
 export const store = configureStore({
-  reducer: { auth: authReducer },
+  reducer: { auth: authReducer, artwork: artworkReducer },
 });
 
 // Types for dispatch and selector

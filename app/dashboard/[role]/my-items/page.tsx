@@ -1,3 +1,7 @@
+"use client";
+
+import { DataTableArtWorksRecords } from "@/components/seller-dashboard/my-items/data-table-artworks";
+
 export default function MyItemPage() {
-  return <>My Item Page</>;
+  return <DataTableArtWorksRecords onAdd={() => {}} onEdit={() => {}} />;
 }
