@@ -2,8 +2,8 @@
 
 import { use } from "react";
 import UserDashboardComponents from "@/components/user-dashboard/UserDashboardComponents";
-import SellerDashboardComponents from "@/components/user-dashboard/UserDashboardComponents";
-import PreserverDashboardComponents from "@/components/user-dashboard/UserDashboardComponents";
+import SellerDashboardComponents from "@/components/seller-dashboard/SellerDashboardComponents";
+import PreserverDashboardComponents from "@/components/preserver-dashboard/PreserverDashboardComponents";
 
 export default function DashboardPage({
   params,

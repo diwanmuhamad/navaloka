@@ -17,6 +17,7 @@ import {
   IconSearch,
   IconSettings,
   IconUsers,
+  type Icon,
 } from "@tabler/icons-react";
 
 import { NavDocuments } from "@/components/nav-documents";
@@ -36,73 +37,50 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { useEffect, useState } from "react";
 
-const data = {
-  navMain: [
-    {
-      title: "Dashboard",
-      url: "#",
-      icon: IconDashboard,
-    },
-    {
-      title: "My Collections",
-      url: "#",
-      icon: IconListDetails,
-    },
-    {
-      title: "Transactions",
-      url: "#",
-      icon: IconChartBar,
-    },
-  ],
-  navClouds: [
-    {
-      title: "Capture",
-      icon: IconCamera,
-      isActive: true,
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Proposal",
-      icon: IconFileDescription,
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Prompts",
-      icon: IconFileAi,
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
-      ],
-    },
-  ],
-};
+interface NavItem {
+  title: string;
+  url: string;
+  icon: Icon; // or React.ElementType if you prefer
+}
+
+const navMainUser: NavItem[] = [
+  {
+    title: "Dashboard",
+    url: "/dashboard/user",
+    icon: IconDashboard,
+  },
+  {
+    title: "My Collections",
+    url: "/dashboard/user/my-collections",
+    icon: IconListDetails,
+  },
+];
+
+const navMainSeller: NavItem[] = [
+  {
+    title: "Dashboard",
+    url: "/dashboard/seller",
+    icon: IconDashboard,
+  },
+  {
+    title: "My Items",
+    url: "/dashboard/seller/my-items",
+    icon: IconListDetails,
+  },
+];
+
+const navMainPreserver: NavItem[] = [
+  {
+    title: "Dashboard",
+    url: "/dashboard/preserver",
+    icon: IconDashboard,
+  },
+  {
+    title: "My Items",
+    url: "/dashboard/preserver/my-items",
+    icon: IconListDetails,
+  },
+];
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { user } = useSelector((state: RootState) => state.auth);
@@ -111,6 +89,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     email: string;
     avatar: string;
   }>({ name: "", email: "", avatar: "" });
+  const [menu, setMenu] = useState<NavItem[]>([]);
 
   useEffect(() => {
     if (user) {
@@ -119,6 +98,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         email: user.email || "",
         avatar: "",
       });
+
+      const role = user.user_metadata.role;
+      if (role === "user") setMenu(navMainUser);
+      if (role === "seller") setMenu(navMainSeller);
+      if (role === "preserver") setMenu(navMainPreserver);
     }
   }, [user]);
   return (
@@ -139,7 +123,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
+        <NavMain items={menu} />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={userData} />
