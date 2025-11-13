@@ -27,7 +27,6 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
 import { Artwork } from "@/types/artwork";
-import { is } from "zod/v4/locales";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 
@@ -57,9 +56,8 @@ export function NFTFormDrawer({
       description: initialData?.description || "",
       creator_name: initialData?.creator_name || "",
       receiver_account: initialData?.receiver_account || "",
-      owner: initialData?.owner || "",
       price: initialData?.price || 0,
-      supply: initialData?.supply || 1,
+      supply: 1,
       artwork_type: initialData?.artwork_type || "digital",
       artwork_format: initialData?.artwork_format || "2D",
       category: initialData?.category || "",
@@ -162,15 +160,6 @@ export function NFTFormDrawer({
               </div>
 
               <div className="flex flex-col gap-3 md:col-span-1">
-                <Label htmlFor="owner">Owner</Label>
-                <Input
-                  id="owner"
-                  {...form.register("owner")}
-                  placeholder="Owner"
-                />
-              </div>
-
-              <div className="flex flex-col gap-3 md:col-span-1">
                 <Label htmlFor="price">Price (IDR)</Label>
                 <Input
                   type="number"
@@ -179,11 +168,12 @@ export function NFTFormDrawer({
                 />
               </div>
 
-              <div className="flex flex-col gap-3 md:col-span-1">
+              <div className="flex flex-col gap-3 md:col-span-1 hidden">
                 <Label htmlFor="supply">Supply</Label>
                 <Input
                   type="number"
                   id="supply"
+                  defaultValue={1}
                   {...form.register("supply", { valueAsNumber: true })}
                 />
               </div>
@@ -203,15 +193,6 @@ export function NFTFormDrawer({
                     <SelectItem value="physical">Physical</SelectItem>
                   </SelectContent>
                 </Select>
-              </div>
-
-              <div className="flex flex-col gap-3 md:col-span-2">
-                <Label htmlFor="category">Category</Label>
-                <Input
-                  id="category"
-                  {...form.register("category")}
-                  placeholder="e.g. Abstract, Portrait"
-                />
               </div>
 
               <div className="flex flex-col gap-3 md:col-span-1">
@@ -237,6 +218,15 @@ export function NFTFormDrawer({
                   id="region"
                   {...form.register("region")}
                   placeholder="e.g. Asia, Europe"
+                />
+              </div>
+
+              <div className="flex flex-col gap-3 md:col-span-2">
+                <Label htmlFor="category">Category</Label>
+                <Input
+                  id="category"
+                  {...form.register("category")}
+                  placeholder="e.g. Abstract, Portrait"
                 />
               </div>
 

@@ -12,7 +12,6 @@ export const nftSchema = z.object({
   artwork_type: z.enum(["digital", "physical"]),
   artwork_format: z.enum(["2D", "3D"]),
   supply: z.number().min(1, "At least 1 item required"),
-  owner: z.string(),
   license_terms: z.string().min(1, "License terms are required"),
   image: z.instanceof(File, { message: "Image file is required" }),
 });

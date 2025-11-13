@@ -7,7 +7,6 @@ import axios from "axios";
 export const nftSchema = z.object({
   title: z.string().min(1),
   creator_name: z.string().min(1),
-  owner: z.string().min(1),
   description: z.string().min(1),
   artwork_type: z.string().min(1),
   artwork_format: z.string().min(1),
@@ -50,7 +49,6 @@ export async function handleNFTUpload(values: z.infer<typeof nftSchema>) {
       image: imageUri,
       attributes: [
         { trait_type: "Creator", value: values.creator_name },
-        { trait_type: "Owner", value: values.owner },
         { trait_type: "Artwork Type", value: values.artwork_type },
         { trait_type: "Format", value: values.artwork_format },
         { trait_type: "Category", value: values.category },

@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { IconDotsVertical } from "@tabler/icons-react";
 import { toast } from "sonner";
+import { ExternalLink } from "lucide-react";
 
 import {
   ColumnDef,
@@ -131,9 +132,34 @@ export function DataTableArtWorksRecords({
         cell: (info) => info.getValue() as number,
       },
       {
-        accessorKey: "supply",
-        header: "Jumlah",
-        cell: (info) => info.getValue() as number,
+        accessorKey: "nft_address",
+        header: "Alamat NFT",
+        size: 250,
+        cell: ({ row }) => (
+          <a
+            target="_blank"
+            href={`https://solscan.io/token/${row.original.nft_address}?cluster=devnet`}
+            className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-medium shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300"
+          >
+            <ExternalLink size={16} />
+            <span>View on Solscan</span>
+          </a>
+        ),
+      },
+      {
+        accessorKey: "artwork_format",
+        header: "Format Karya",
+        cell: (info) => info.getValue() as string,
+      },
+      {
+        accessorKey: "artwork_type",
+        header: "Tipe Karya",
+        cell: (info) => info.getValue() as string,
+      },
+      {
+        accessorKey: "region",
+        header: "Region",
+        cell: (info) => info.getValue() as string,
       },
       {
         accessorKey: "creator_name",
