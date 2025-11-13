@@ -31,7 +31,7 @@ export const fetchArtWorkRecords = createAsyncThunk(
 
 export const addArtWorkRecord = createAsyncThunk(
   "artworkRecords/addArtWorkRecord",
-  async (payload: Omit<Artwork, "id">) => {
+  async (payload: Omit<Artwork, "id" | "created_at" | "updated_at">) => {
     const {
       creator_id,
       receiver_account,
@@ -49,8 +49,6 @@ export const addArtWorkRecord = createAsyncThunk(
       status,
       supply,
       is_verified,
-      created_at,
-      updated_at,
     } = payload;
     const { data, error } = await supabase
       .from("artworks")
@@ -72,8 +70,6 @@ export const addArtWorkRecord = createAsyncThunk(
           status,
           supply,
           is_verified,
-          created_at,
-          updated_at,
         },
       ])
       .select("*")

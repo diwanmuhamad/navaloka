@@ -92,7 +92,7 @@ export function DataTableArtWorksRecords({
       {
         id: "drag",
         header: () => null,
-        size: 50,
+        size: 30,
         cell: ({ row }) => <DragHandle id={row.original.id} />,
       },
       {
