@@ -1,9 +1,8 @@
 # NavaLoka: Platform AI & Blockchain untuk Pelestarian dan Ekonomi Kreatif Budaya Indonesia
 
 ![NavaLoka Landing Page](./public/landing-hero.png)
-_Gambar: Tampilan halaman beranda NavaLoka yang menampilkan slogan "Budaya. Kreativitas. Teknologi." dan tombol aksi utama dengan desain modern berwarna gelap dan pola kisi-kisi di latar belakang._
 
-> **Catatan**: Simpan gambar landing page di folder `public/` dengan nama `landing-hero.png` (atau sesuaikan path di atas bila memakai nama lain/URL).
+**Link Website**: https://navaloka.vercel.app/
 
 ## Daftar Isi
 
