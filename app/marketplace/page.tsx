@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store/store";
 import { fetchArtWorkRecords, totalArtWorkRecords } from "@/store/artWorkSlice";
 import { toast } from "sonner";
+import ArtworkImage from "@/components/ArtworkImage";
 
 const HEIGHT_OPTIONS = [
   520, 380, 620, 460, 500, 540, 580, 620, 660, 700, 400, 300, 440, 700, 520,
@@ -139,7 +140,7 @@ export default function MarketplacePage() {
                 <button
                   key={category}
                   onClick={() => setSelectedCategory(category)}
-                  className={`px-5 py-2 rounded-full text-sm font-medium tracking-wide border transition-all duration-200 ${
+                  className={`cursor-pointer px-5 py-2 rounded-full text-sm font-medium tracking-wide border transition-all duration-200 ${
                     isActive
                       ? "bg-slate-900 text-slate-50 border-slate-900 dark:bg-slate-50 dark:text-slate-900"
                       : "bg-transparent text-slate-700 border-slate-300 hover:border-slate-900 dark:text-slate-200 dark:border-slate-700"
@@ -211,11 +212,7 @@ export default function MarketplacePage() {
                       }}
                     >
                       {karya.image_url ? (
-                        <img
-                          src={karya.image_url}
-                          alt={karya.title}
-                          className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                        />
+                        <ArtworkImage src={karya.image_url} alt={karya.title} />
                       ) : (
                         <div className="flex h-full w-full items-center justify-center bg-slate-200/70 dark:bg-slate-900/60">
                           <Image className="h-12 w-12 text-slate-400" />
@@ -260,7 +257,7 @@ export default function MarketplacePage() {
                         <div className="flex gap-2 text-[11px] font-semibold uppercase tracking-[0.25em]">
                           <button
                             onClick={() => {}}
-                            className="inline-flex items-center gap-1 border border-slate-900 px-3 py-1 text-slate-900 transition-colors duration-150 hover:bg-slate-900 hover:text-white dark:border-slate-200 dark:text-slate-200 dark:hover:bg-slate-200 dark:hover:text-slate-900"
+                            className="cursor-pointer inline-flex items-center gap-1 border border-slate-900 px-3 py-1 text-slate-900 transition-colors duration-150 hover:bg-slate-900 hover:text-white dark:border-slate-200 dark:text-slate-200 dark:hover:bg-slate-200 dark:hover:text-slate-900"
                           >
                             Buy
                           </button>
