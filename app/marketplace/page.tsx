@@ -6,6 +6,11 @@ import { Image } from "lucide-react";
 import Navbar from "@/components/navbar";
 import { BackgroundPattern } from "@/components/background-pattern";
 import Footer from "@/components/footer";
+import { Artwork } from "@/types/artwork";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/store/store";
+import { fetchArtWorkRecords, totalArtWorkRecords } from "@/store/artWorkSlice";
+import { toast } from "sonner";
 
 const HEIGHT_OPTIONS = [
   520, 380, 620, 460, 500, 540, 580, 620, 660, 700, 400, 300, 440, 700, 520,
@@ -29,158 +34,43 @@ const fadeUp = {
   },
 };
 
-interface Karya {
-  id: string;
-  title: string;
-  category: string;
-  medium: string;
-  dimensions: string;
-  price: number;
-  image_url?: string;
-  artist_name?: string;
-  description?: string;
-  highlight?: string;
-}
-
 export default function MarketplacePage() {
-  const [karyaList, setKaryaList] = useState<Karya[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const { records, loading } = useSelector((state: RootState) => state.artwork);
+  const dispatch = useDispatch<AppDispatch>();
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [totalCount, setTotalCount] = useState<number>(0);
 
   const layoutMap = useMemo(() => {
     const map = new Map<string, { height: number; spanAll: boolean }>();
-    karyaList.forEach((karya, index) => {
+    records.forEach((karya, index) => {
       map.set(karya.id, {
         height: HEIGHT_OPTIONS[index % HEIGHT_OPTIONS.length],
         spanAll: false,
       });
     });
     return map;
-  }, [karyaList]);
+  }, [records]);
 
   useEffect(() => {
-    fetchKarya();
-  }, []);
+    const fetchData = async () => {
+      try {
+        // 1. Fetch artworks by category
+        await dispatch(
+          fetchArtWorkRecords({
+            artwork_format: selectedCategory,
+          })
+        ).unwrap();
 
-  const fetchKarya = async () => {
-    try {
-      setLoading(true);
+        // 2. Fetch total count
+        const count = await dispatch(totalArtWorkRecords()).unwrap();
+        setTotalCount(count);
+      } catch (error) {
+        toast.error(`Error fetching artworks: ${error}`);
+      }
+    };
 
-      const mockKarya: Karya[] = [
-        {
-          id: "1",
-          title: "Wayang Kulit Modern",
-          category: "2D",
-          medium: "Kulit Sapi, Cat Akrilik",
-          dimensions: '30" x 24"',
-          price: 2500000,
-          artist_name: "Budi Santoso",
-          description: "Karya wayang kulit kontemporer dengan sentuhan modern",
-          highlight: "Pilihan Kurator",
-          image_url:
-            "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1200&q=80",
-        },
-        {
-          id: "2",
-          title: "Batik Tulis Nusantara",
-          category: "2D",
-          medium: "Kain Katun, Lilin, Pewarna Alami",
-          dimensions: "200cm x 110cm",
-          price: 3500000,
-          artist_name: "Siti Nurhaliza",
-          description: "Batik tulis tradisional dengan motif nusantara",
-          highlight: "Best in Show - 2D",
-          image_url:
-            "https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=1200&q=80",
-        },
-        {
-          id: "3",
-          title: "Patung Garuda Emas",
-          category: "3D",
-          medium: "Kuningan, Emas 24K",
-          dimensions: "50cm x 40cm x 30cm",
-          price: 15000000,
-          artist_name: "Ahmad Wijaya",
-          description: "Patung garuda dengan detail ukiran tradisional",
-          highlight: "First Place - 3D",
-          image_url:
-            "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80",
-        },
-        {
-          id: "4",
-          title: "Lukisan Pemandangan Bali",
-          category: "2D",
-          medium: "Cat Minyak di Kanvas",
-          dimensions: '60" x 40"',
-          price: 4500000,
-          artist_name: "Ketut Surya",
-          description: "Lukisan pemandangan sawah terasering di Bali",
-          highlight: "People's Choice",
-          image_url:
-            "https://images.unsplash.com/photo-1526481280695-3c46917f14dd?auto=format&fit=crop&w=1200&q=80",
-        },
-        {
-          id: "5",
-          title: "Keramik Gaya Majapahit",
-          category: "3D",
-          medium: "Tanah Liat, Glaze",
-          dimensions: "25cm x 25cm x 20cm",
-          price: 1200000,
-          artist_name: "Dewi Lestari",
-          description: "Keramik dengan motif dan bentuk gaya Majapahit",
-          highlight: "Honorable Mention",
-          image_url:
-            "https://images.unsplash.com/photo-1457374258525-8560d3b5c2ed?auto=format&fit=crop&w=1200&q=80",
-        },
-        {
-          id: "6",
-          title: "Tenun Ikat Sumba",
-          category: "2D",
-          medium: "Benang Katun, Pewarna Alami",
-          dimensions: "250cm x 120cm",
-          price: 2800000,
-          artist_name: "Maria Wunga",
-          description: "Tenun ikat tradisional Sumba dengan motif kuda",
-          highlight: "Second Place - 2D",
-          image_url:
-            "https://images.unsplash.com/photo-1617032449332-5616b0dcd389?auto=format&fit=crop&w=1200&q=80",
-        },
-        {
-          id: "7",
-          title: "Topeng Malangan",
-          category: "3D",
-          medium: "Kayu Jati, Cat Akrilik",
-          dimensions: "30cm x 25cm x 15cm",
-          price: 850000,
-          artist_name: "Joko Prasetyo",
-          description: "Topeng tradisional Malang dengan karakter wayang",
-          highlight: "Favorite of the Week",
-          image_url:
-            "https://images.unsplash.com/photo-1516349935484-a69b0b87f519?auto=format&fit=crop&w=1200&q=80",
-        },
-        {
-          id: "8",
-          title: "Kaligrafi Arab-Jawa",
-          category: "2D",
-          medium: "Kertas Khusus, Tinta Emas",
-          dimensions: "50cm x 70cm",
-          price: 3200000,
-          artist_name: "Ahmad Fauzi",
-          description: "Kaligrafi dengan gaya Arab-Jawa yang unik",
-          highlight: "Editor's Pick",
-          image_url:
-            "https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=1200&q=80",
-        },
-      ];
-
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      setKaryaList(mockKarya);
-    } catch (error) {
-      console.error("Error fetching karya:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+    fetchData();
+  }, [selectedCategory, dispatch]);
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat("id-ID", {
@@ -195,12 +85,8 @@ export default function MarketplacePage() {
     "2D": "text-rose-700 bg-rose-100/70 dark:text-rose-300 dark:bg-rose-500/10",
     "3D": "text-sky-700 bg-sky-100/70 dark:text-sky-300 dark:bg-sky-500/10",
   };
-  const filteredKarya =
-    selectedCategory === "All" || !selectedCategory
-      ? karyaList
-      : karyaList.filter((k) => k.category === selectedCategory);
 
-  const handleBuy = (karya: Karya) => {
+  const handleBuy = (karya: Artwork) => {
     console.log("Buying:", karya);
   };
 
@@ -248,15 +134,11 @@ export default function MarketplacePage() {
             animate="show"
           >
             {categories.map((category) => {
-              const isActive =
-                selectedCategory === category ||
-                (!selectedCategory && category === "All");
+              const isActive = selectedCategory === category;
               return (
                 <button
                   key={category}
-                  onClick={() =>
-                    setSelectedCategory(category === "All" ? null : category)
-                  }
+                  onClick={() => setSelectedCategory(category)}
                   className={`px-5 py-2 rounded-full text-sm font-medium tracking-wide border transition-all duration-200 ${
                     isActive
                       ? "bg-slate-900 text-slate-50 border-slate-900 dark:bg-slate-50 dark:text-slate-900"
@@ -306,7 +188,7 @@ export default function MarketplacePage() {
               initial="hidden"
               animate="show"
             >
-              {filteredKarya.map((karya) => {
+              {records.map((karya: Artwork) => {
                 const layout = layoutMap.get(karya.id) || {
                   height: 400,
                   spanAll: false,
@@ -341,8 +223,7 @@ export default function MarketplacePage() {
                       )}
                       <span
                         className={`absolute top-4 left-4 inline-flex items-center rounded-sm px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.25em] ${
-                          categoryStyles[karya.category] ??
-                          "text-slate-900 bg-white/80 dark:text-slate-200 dark:bg-slate-900/70"
+                          categoryStyles[karya.artwork_format]
                         }`}
                       >
                         {karya.category}
@@ -350,19 +231,13 @@ export default function MarketplacePage() {
                     </div>
 
                     <div className="mt-4 space-y-2">
-                      {karya.highlight && (
-                        <p className="text-[11px] uppercase tracking-[0.35em] text-slate-500 dark:text-slate-400">
-                          {karya.highlight}
-                        </p>
-                      )}
-
                       <h3 className="text-base font-semibold tracking-tight text-slate-900 dark:text-slate-100">
                         {karya.title}
                       </h3>
 
-                      {karya.artist_name && (
+                      {karya.creator_name && (
                         <p className="text-xs text-slate-600 dark:text-slate-300">
-                          {karya.artist_name}
+                          {karya.creator_name}
                         </p>
                       )}
 
@@ -373,9 +248,9 @@ export default function MarketplacePage() {
                       )}
 
                       <div className="flex flex-wrap gap-3 text-[11px] uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400">
-                        <span>{karya.medium}</span>
+                        <span>{karya.artwork_type}</span>
                         <span>•</span>
-                        <span>{karya.dimensions}</span>
+                        <span>{karya.artwork_format}</span>
                       </div>
 
                       <div className="flex flex-wrap items-center gap-3 pt-2">
@@ -384,7 +259,7 @@ export default function MarketplacePage() {
                         </p>
                         <div className="flex gap-2 text-[11px] font-semibold uppercase tracking-[0.25em]">
                           <button
-                            onClick={() => handleBuy(karya)}
+                            onClick={() => {}}
                             className="inline-flex items-center gap-1 border border-slate-900 px-3 py-1 text-slate-900 transition-colors duration-150 hover:bg-slate-900 hover:text-white dark:border-slate-200 dark:text-slate-200 dark:hover:bg-slate-200 dark:hover:text-slate-900"
                           >
                             Buy
@@ -399,7 +274,7 @@ export default function MarketplacePage() {
           )}
 
           {/* Empty State */}
-          {!loading && filteredKarya.length === 0 && (
+          {!loading && records.length === 0 && (
             <motion.div
               className="text-center py-20"
               variants={fadeUp}
@@ -413,7 +288,7 @@ export default function MarketplacePage() {
           )}
 
           {/* Results Count */}
-          {!loading && filteredKarya.length > 0 && (
+          {!loading && records.length > 0 && (
             <motion.div
               className="text-center mt-12 text-foreground/60"
               variants={fadeUp}
@@ -421,7 +296,7 @@ export default function MarketplacePage() {
               animate="show"
             >
               <p>
-                Menampilkan {filteredKarya.length} dari {karyaList.length} karya
+                Menampilkan {records.length} dari {totalCount} karya
               </p>
             </motion.div>
           )}

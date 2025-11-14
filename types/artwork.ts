@@ -19,3 +19,15 @@ export interface Artwork {
   created_at: string;
   updated_at: string;
 }
+
+export interface fetchArtWorksParams {
+  creator_id?: string;
+  status?: string;
+  artwork_format?: string;
+}
+
+export interface ArtWorkState {
+  records: Artwork[];
+  loading: boolean;
+  error: string | null;
+}

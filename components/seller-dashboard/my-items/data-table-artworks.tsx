@@ -27,6 +27,7 @@ import {
 import { IconDotsVertical } from "@tabler/icons-react";
 import { toast } from "sonner";
 import { ExternalLink } from "lucide-react";
+import { fetchArtWorksParams } from "@/types/artwork";
 
 import {
   ColumnDef,
@@ -85,7 +86,10 @@ export function DataTableArtWorksRecords({
     React.useState<VisibilityState>({});
 
   React.useEffect(() => {
-    if (!loading && user) dispatch(fetchArtWorkRecords(user.id));
+    if (!loading && user) {
+      const params: fetchArtWorksParams = { creator_id: user.id };
+      dispatch(fetchArtWorkRecords(params));
+    }
   }, [dispatch, loading, user]);
 
   const columns = React.useMemo<ColumnDef<Artwork>[]>(

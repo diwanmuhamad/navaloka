@@ -1,12 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { supabase } from "@/lib/supabaseClient";
 import { Artwork } from "@/types/artwork";
-
-interface ArtWorkState {
-  records: Artwork[];
-  loading: boolean;
-  error: string | null;
-}
+import { fetchArtWorksParams, ArtWorkState } from "@/types/artwork";
 
 const initialState: ArtWorkState = {
   records: [],
@@ -16,16 +11,36 @@ const initialState: ArtWorkState = {
 
 export const fetchArtWorkRecords = createAsyncThunk(
   "artworkRecords/fetchArtWorkRecords",
-  async (id: string) => {
+  async (params: fetchArtWorksParams) => {
     let query = supabase
       .from("artworks")
       .select("*")
-      .eq("creator_id", id)
       .order("created_at", { ascending: false });
+
+    if (params.creator_id) {
+      query = query.eq("creator_id", params.creator_id);
+    }
+    if (params.status) {
+      query = query.eq("status", params.status);
+    }
+    if (params.artwork_format && params.artwork_format !== "All") {
+      query = query.eq("artwork_format", params.artwork_format);
+    }
     const { data, error } = await query;
     if (error) throw error;
 
     return data as Artwork[];
+  }
+);
+
+export const totalArtWorkRecords = createAsyncThunk(
+  "artworkRecords/totalArtWorkRecords",
+  async () => {
+    let query = supabase.from("artworks").select("*", { count: "exact" });
+    const { count, error } = await query;
+    if (error) throw error;
+
+    return count as number;
   }
 );
 
