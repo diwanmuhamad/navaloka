@@ -155,7 +155,7 @@ export function NFTFormDrawer({
                 <Input
                   id="receiver_account"
                   {...form.register("receiver_account")}
-                  placeholder="Receiver wallet (if any)"
+                  placeholder="BCA Account Number"
                 />
               </div>
 

@@ -12,6 +12,8 @@ import { AppDispatch, RootState } from "@/store/store";
 import { fetchArtWorkRecords, totalArtWorkRecords } from "@/store/artWorkSlice";
 import { toast } from "sonner";
 import ArtworkImage from "@/components/ArtworkImage";
+import axios from "axios";
+import { ConfirmationModal } from "@/components/ConfirmationModal";
 
 const HEIGHT_OPTIONS = [
   520, 380, 620, 460, 500, 540, 580, 620, 660, 700, 400, 300, 440, 700, 520,
@@ -40,6 +42,8 @@ export default function MarketplacePage() {
   const dispatch = useDispatch<AppDispatch>();
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [totalCount, setTotalCount] = useState<number>(0);
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedKarya, setSelectedKarya] = useState<Artwork | null>(null);
 
   const layoutMap = useMemo(() => {
     const map = new Map<string, { height: number; spanAll: boolean }>();
@@ -87,8 +91,9 @@ export default function MarketplacePage() {
     "3D": "text-sky-700 bg-sky-100/70 dark:text-sky-300 dark:bg-sky-500/10",
   };
 
-  const handleBuy = (karya: Artwork) => {
-    console.log("Buying:", karya);
+  const handleClickBuy = async (karya: Artwork) => {
+    setOpenModal(true);
+    setSelectedKarya(karya);
   };
 
   return (
@@ -256,7 +261,7 @@ export default function MarketplacePage() {
                         </p>
                         <div className="flex gap-2 text-[11px] font-semibold uppercase tracking-[0.25em]">
                           <button
-                            onClick={() => {}}
+                            onClick={() => handleClickBuy(karya)}
                             className="cursor-pointer inline-flex items-center gap-1 border border-slate-900 px-3 py-1 text-slate-900 transition-colors duration-150 hover:bg-slate-900 hover:text-white dark:border-slate-200 dark:text-slate-200 dark:hover:bg-slate-200 dark:hover:text-slate-900"
                           >
                             Buy
@@ -300,6 +305,11 @@ export default function MarketplacePage() {
         </div>
       </div>
       <Footer />
+      <ConfirmationModal
+        open={openModal}
+        setOpen={setOpenModal}
+        karya={selectedKarya}
+      />
     </>
   );
 }
