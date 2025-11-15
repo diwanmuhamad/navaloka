@@ -38,6 +38,7 @@ const fadeUp = {
 };
 
 export default function MarketplacePage() {
+  const { user } = useSelector((state: RootState) => state.auth);
   const { records, loading } = useSelector((state: RootState) => state.artwork);
   const dispatch = useDispatch<AppDispatch>();
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
@@ -63,11 +64,14 @@ export default function MarketplacePage() {
         await dispatch(
           fetchArtWorkRecords({
             artwork_format: selectedCategory,
+            status: "published",
           })
         ).unwrap();
 
         // 2. Fetch total count
-        const count = await dispatch(totalArtWorkRecords()).unwrap();
+        const count = await dispatch(
+          totalArtWorkRecords({ status: "published" })
+        ).unwrap();
         setTotalCount(count);
       } catch (error) {
         toast.error(`Error fetching artworks: ${error}`);
@@ -92,6 +96,10 @@ export default function MarketplacePage() {
   };
 
   const handleClickBuy = async (karya: Artwork) => {
+    if (!user) {
+      toast.error("Please log in to purchase artworks.");
+      return;
+    }
     setOpenModal(true);
     setSelectedKarya(karya);
   };

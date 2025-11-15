@@ -107,7 +107,7 @@ export function DataTableArtWorksRecords({
         cell: ({ row }) => (
           <Button
             variant="link"
-            className="text-foreground w-fit px-0 text-left cursor-pointer"
+            className="text-foreground w-fit px-0 text-left cursor-pointer whitespace-normal break-words"
             onClick={() => onEdit(row.original)}
           >
             {row.original.title}
@@ -119,15 +119,19 @@ export function DataTableArtWorksRecords({
         header: "Kategori",
         size: 150,
         cell: ({ row }) => (
-          <span className="text-sm">{row.original.category || "-"}</span>
+          <span className="text-sm whitespace-normal break-words">
+            {row.original.category || "-"}
+          </span>
         ),
       },
       {
         id: "description",
         header: "Deskripsi",
-        size: 300,
+        size: 400,
         cell: ({ row }) => (
-          <span className="text-sm">{row.original.description || "-"}</span>
+          <span className="text-sm whitespace-normal break-words">
+            {row.original.description || "-"}
+          </span>
         ),
       },
       {
@@ -198,7 +202,7 @@ export function DataTableArtWorksRecords({
                     await dispatch(
                       deleteArtWorkRecord(row.original.id)
                     ).unwrap();
-                    toast.success("Rekam medis berhasil dihapus");
+                    toast.success("ArtWork berhasil dihapus");
                   } catch (error) {
                     const msg =
                       error && typeof error === "object" && "message" in error

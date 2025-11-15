@@ -35,8 +35,12 @@ export const fetchArtWorkRecords = createAsyncThunk(
 
 export const totalArtWorkRecords = createAsyncThunk(
   "artworkRecords/totalArtWorkRecords",
-  async () => {
+  async (params: fetchArtWorksParams) => {
     let query = supabase.from("artworks").select("*", { count: "exact" });
+
+    if (params.status) {
+      query = query.eq("status", params.status);
+    }
     const { count, error } = await query;
     if (error) throw error;
 

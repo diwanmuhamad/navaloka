@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dialog";
 import { Artwork } from "@/types/artwork";
 import axios from "axios";
+import { useState } from "react";
 import { toast } from "sonner";
 
 interface ConfirmationModalProps {
@@ -25,7 +26,9 @@ export function ConfirmationModal({
   setOpen,
   karya,
 }: ConfirmationModalProps) {
+  const [loading, setLoading] = useState(false);
   const handleCheckout = async () => {
+    setLoading(true);
     try {
       const res = await axios.post("/api/xendit/checkout", {
         item_id: karya?.id,
@@ -35,7 +38,6 @@ export function ConfirmationModal({
       window.location.href = res.data.invoiceUrl;
     } catch {
       toast.error("Failed to initiate checkout. Please try again.");
-      return;
     }
   };
   return (
@@ -56,8 +58,12 @@ export function ConfirmationModal({
             </Button>
           </DialogClose>
 
-          <Button onClick={handleCheckout} className="cursor-pointer">
-            Checkout
+          <Button
+            onClick={handleCheckout}
+            className="cursor-pointer"
+            disabled={loading}
+          >
+            {loading ? "Redirecting..." : "Checkout"}
           </Button>
         </DialogFooter>
       </DialogContent>
