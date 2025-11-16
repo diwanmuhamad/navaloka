@@ -1,10 +1,10 @@
 "use client";
 import { motion, easeOut } from "framer-motion";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight, CirclePlay } from "lucide-react";
 import { BackgroundPattern } from "@/components/background-pattern";
-import Link from "next/link";
+import SplitText from "./SplitText";
+import LiquidChrome from "./LiquidChrome";
 
 // Animation variants
 const containerVariants = {
@@ -32,7 +32,12 @@ export default function Hero() {
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         className="absolute inset-0"
       >
-        <BackgroundPattern />
+        <LiquidChrome
+          baseColor={[0.7, 0.7, 0.9]}
+          speed={0.3}
+          amplitude={0.3}
+          interactive={true}
+        />
       </motion.div>
 
       <motion.div
@@ -42,12 +47,18 @@ export default function Hero() {
         whileInView="show"
         viewport={{ once: true, amount: 0.4 }}
       >
-        <motion.h1
-          className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl md:leading-[1.2] font-semibold tracking-tighter"
-          variants={fadeUp}
-        >
-          Budaya. Kreativitas. Teknologi.
-        </motion.h1>
+        <SplitText
+          text="Budaya. Kreativitas. Teknologi."
+          className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl md:leading-[1.2] font-semibold tracking-tighter p-3"
+          delay={100}
+          duration={0.6}
+          ease="power3.out"
+          splitType="chars"
+          from={{ opacity: 0, y: 40 }}
+          to={{ opacity: 1, y: 0 }}
+          threshold={0.1}
+          rootMargin="-100px"
+        />
 
         <motion.p
           className="mt-6 md:text-lg text-foreground/80"
